@@ -1,0 +1,6 @@
+{
+  "name": "Drift-Sense: Wafer Inspection AI",
+  "description": "AI-Powered Navigation Error Recovery & Drift Correction for Semiconductor Wafer Inspection",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
