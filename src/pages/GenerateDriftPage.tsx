@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Sliders, RotateCcw, Cpu, Zap, ArrowRight, Activity, Flame, Sparkles } from 'lucide-react';
+import { Sliders, RotateCcw, Zap, Activity, Sparkles } from 'lucide-react';
 import { GlassCard } from '../components/common/GlassCard';
 import { WaferCanvas } from '../components/common/WaferCanvas';
 
@@ -36,13 +36,13 @@ export const GenerateDriftPage: React.FC = () => {
   return (
     <div className="space-y-6 text-slate-100 pb-12">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1b2844] pb-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2 text-white">
-            <Sliders className="w-6 h-6 text-cyan-400" />
-            Micro-Stage Physical Jitter & Thermal Drift Simulator
+          <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2 text-white font-heading">
+            <Sliders className="w-5 h-5 text-cyan-400" />
+            Micro-Stage Physical Jitter &amp; Thermal Drift Simulator
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-400 mt-1 font-mono">
             Inject synthetic mechanical backlash, thermal expansion warpage, and SEM noise to test AI recovery robustness.
           </p>
         </div>
@@ -51,7 +51,7 @@ export const GenerateDriftPage: React.FC = () => {
           <button
             type="button"
             onClick={handleRandomizeJitter}
-            className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono px-3 py-2 rounded-lg border border-slate-700 transition-colors"
+            className="flex items-center gap-1.5 bg-[#0e1628] hover:bg-[#152038] text-slate-200 text-xs font-mono px-3 py-2 rounded border border-[#233554] transition-colors uppercase"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             Random Jitter
@@ -59,7 +59,7 @@ export const GenerateDriftPage: React.FC = () => {
           <button
             type="button"
             onClick={handleResetSimulator}
-            className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-mono px-3 py-2 rounded-lg border border-slate-700 transition-colors"
+            className="flex items-center gap-1.5 bg-[#0e1628] hover:bg-[#152038] text-slate-200 text-xs font-mono px-3 py-2 rounded border border-[#233554] transition-colors uppercase"
           >
             <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
             Reset Stage
@@ -69,11 +69,11 @@ export const GenerateDriftPage: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column: Interactive Sliders */}
-        <div className="lg:col-span-5 space-y-5">
-          <GlassCard glow glowColor="cyan" className="space-y-4">
-            <h3 className="font-bold text-sm text-white flex items-center justify-between border-b border-slate-700/80 pb-3">
+        <div className="lg:col-span-5 space-y-5 font-mono">
+          <GlassCard glow glowColor="cyan" className="space-y-4 border-[#1e2d4a]">
+            <h3 className="font-bold text-sm text-white flex items-center justify-between border-b border-[#1b2844] pb-3 font-heading">
               <span>Stage Drift Parameters</span>
-              <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+              <span className="text-[10px] font-mono text-cyan-400 bg-cyan-950/70 px-2 py-0.5 rounded border border-cyan-500/30">
                 RESOLUTION: 0.1 nm
               </span>
             </h3>
@@ -165,7 +165,7 @@ export const GenerateDriftPage: React.FC = () => {
             <div className="space-y-1.5">
               <div className="flex justify-between text-xs font-mono">
                 <span className="text-slate-300">Thermal Warpage Ratio:</span>
-                <span className="text-purple-400 font-bold">{thermalStrain}% strain</span>
+                <span className="text-indigo-300 font-bold">{thermalStrain}% strain</span>
               </div>
               <input
                 type="range"
@@ -174,7 +174,7 @@ export const GenerateDriftPage: React.FC = () => {
                 step="1"
                 value={thermalStrain}
                 onChange={(e) => setThermalStrain(parseInt(e.target.value))}
-                className="w-full accent-purple-400 cursor-pointer"
+                className="w-full accent-indigo-400 cursor-pointer"
               />
             </div>
           </GlassCard>
@@ -182,7 +182,7 @@ export const GenerateDriftPage: React.FC = () => {
           <button
             type="button"
             onClick={handleRunPredictionWithCustom}
-            className="w-full bg-gradient-to-r from-blue-600 via-cyan-500 to-emerald-500 hover:opacity-95 text-white font-bold py-3.5 rounded-xl shadow-xl shadow-cyan-500/20 flex items-center justify-center gap-2 transition-all text-sm"
+            className="w-full bg-gradient-to-r from-cyan-500 to-teal-400 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-bold py-3.5 rounded shadow-[0_0_15px_rgba(0,229,255,0.25)] flex items-center justify-center gap-2 transition-all text-xs font-mono uppercase"
           >
             <Zap className="w-4 h-4 fill-current" />
             Evaluate Custom Drift in AI Engine
@@ -191,9 +191,9 @@ export const GenerateDriftPage: React.FC = () => {
 
         {/* Right Column: Real-time Canvas Render */}
         <div className="lg:col-span-7 space-y-4">
-          <GlassCard className="space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="font-bold text-sm text-white flex items-center gap-2">
+          <GlassCard className="space-y-4 border-[#1e2d4a]">
+            <div className="flex items-center justify-between border-b border-[#1b2844] pb-3">
+              <h3 className="font-bold text-sm text-white flex items-center gap-2 font-heading">
                 <Activity className="w-4 h-4 text-cyan-400" />
                 Real-Time Wafer Stage Preview
               </h3>
@@ -213,17 +213,17 @@ export const GenerateDriftPage: React.FC = () => {
             />
 
             <div className="grid grid-cols-3 gap-3 text-xs font-mono">
-              <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800 text-center">
+              <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844] text-center">
                 <span className="text-slate-400 block text-[10px]">TOTAL DISPLACEMENT</span>
                 <span className="text-cyan-400 font-bold text-sm">
                   {Math.sqrt(dx * dx + dy * dy).toFixed(1)} nm
                 </span>
               </div>
-              <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800 text-center">
+              <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844] text-center">
                 <span className="text-slate-400 block text-[10px]">ROTATION ANGLE</span>
                 <span className="text-amber-400 font-bold text-sm">{rotation}°</span>
               </div>
-              <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800 text-center">
+              <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844] text-center">
                 <span className="text-slate-400 block text-[10px]">NOISE / STRAIN</span>
                 <span className="text-emerald-400 font-bold text-sm">
                   {Math.round(noise * 100)}% / {thermalStrain}%

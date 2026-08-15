@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Zap, Play, RotateCcw, CheckCircle2, Sliders, Cpu, Activity, AlertTriangle } from 'lucide-react';
+import { Zap, Play, RotateCcw, Sliders, Activity } from 'lucide-react';
 import { GlassCard } from './GlassCard';
 
 interface PiezoMotorSimulatorProps {
@@ -107,15 +107,15 @@ export const PiezoMotorSimulator: React.FC<PiezoMotorSimulatorProps> = ({
   const isCompleted = step >= 5 && !isRunning;
 
   return (
-    <GlassCard glow glowColor={isCompleted ? 'emerald' : isRunning ? 'cyan' : 'blue'} className="space-y-4 p-4">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+    <GlassCard glow glowColor={isCompleted ? 'emerald' : isRunning ? 'cyan' : 'blue'} className="space-y-4 p-4 border-[#1e2d4a]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#1b2844] pb-3">
         <div className="flex items-center gap-2">
           <Zap className={`w-5 h-5 ${isRunning ? 'text-amber-400 animate-bounce' : 'text-cyan-400'}`} />
           <div>
             <h3 className="font-bold text-sm text-white flex items-center gap-2 font-mono">
               REAL-TIME PIEZO-MOTOR CLOSED-LOOP SIMULATOR
             </h3>
-            <p className="text-[11px] text-slate-400">
+            <p className="text-[11px] text-slate-400 font-mono">
               Closed-loop feedback control using piezo-electric stage actuators to zero out wafer drift.
             </p>
           </div>
@@ -126,13 +126,13 @@ export const PiezoMotorSimulator: React.FC<PiezoMotorSimulatorProps> = ({
             <button
               type="button"
               onClick={handleStartClosedLoop}
-              className="flex items-center gap-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs px-3.5 py-1.5 rounded-lg shadow-lg shadow-cyan-500/20 font-mono transition-all"
+              className="flex items-center gap-1.5 bg-gradient-to-r from-cyan-500 to-teal-400 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-bold text-xs px-3.5 py-1.5 rounded shadow-[0_0_12px_rgba(0,229,255,0.25)] font-mono uppercase transition-all"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               START LIVE CLOSED-LOOP
             </button>
           ) : isRunning ? (
-            <div className="flex items-center gap-2 bg-amber-500/20 text-amber-300 border border-amber-500/40 px-3 py-1 rounded-lg text-xs font-mono font-bold animate-pulse">
+            <div className="flex items-center gap-2 bg-amber-950/80 text-amber-300 border border-amber-500/40 px-3 py-1 rounded text-xs font-mono font-bold animate-pulse">
               <Activity className="w-3.5 h-3.5 animate-spin" />
               ACTUATING PIEZO MOTORS... ({step}/5)
             </div>
@@ -140,7 +140,7 @@ export const PiezoMotorSimulator: React.FC<PiezoMotorSimulatorProps> = ({
             <button
               type="button"
               onClick={handleReset}
-              className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all"
+              className="flex items-center gap-1.5 bg-[#0e1628] hover:bg-[#152038] text-slate-200 border border-[#233554] px-3 py-1.5 rounded text-xs font-mono font-bold transition-all uppercase"
             >
               <RotateCcw className="w-3.5 h-3.5 text-cyan-400" />
               RESET STAGE
@@ -151,7 +151,7 @@ export const PiezoMotorSimulator: React.FC<PiezoMotorSimulatorProps> = ({
 
       {/* Actuator Output Metrics & Live Voltage Meters */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 font-mono text-xs">
-        <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+        <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
           <div className="text-[10px] text-slate-400">DISPLACEMENT dx</div>
           <div
             className={`text-base font-extrabold mt-0.5 ${
@@ -163,7 +163,7 @@ export const PiezoMotorSimulator: React.FC<PiezoMotorSimulatorProps> = ({
           <div className="text-[9px] text-slate-500 mt-0.5">X Piezo Stack</div>
         </div>
 
-        <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+        <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
           <div className="text-[10px] text-slate-400">DISPLACEMENT dy</div>
           <div
             className={`text-base font-extrabold mt-0.5 ${
@@ -175,7 +175,7 @@ export const PiezoMotorSimulator: React.FC<PiezoMotorSimulatorProps> = ({
           <div className="text-[9px] text-slate-500 mt-0.5">Y Piezo Stack</div>
         </div>
 
-        <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+        <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
           <div className="text-[10px] text-slate-400">ROTATION θ</div>
           <div
             className={`text-base font-extrabold mt-0.5 ${
@@ -187,19 +187,19 @@ export const PiezoMotorSimulator: React.FC<PiezoMotorSimulatorProps> = ({
           <div className="text-[9px] text-slate-500 mt-0.5">Goniometer Stage</div>
         </div>
 
-        <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+        <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
           <div className="text-[10px] text-slate-400">ACTUATOR VOLTAGE Vx</div>
-          <div className="text-base font-extrabold text-blue-400 mt-0.5">{voltageX} V</div>
+          <div className="text-base font-extrabold text-cyan-400 mt-0.5">{voltageX} V</div>
           <div className="text-[9px] text-slate-500 mt-0.5">Range ±150V</div>
         </div>
 
-        <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+        <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
           <div className="text-[10px] text-slate-400">ACTUATOR VOLTAGE Vy</div>
-          <div className="text-base font-extrabold text-purple-400 mt-0.5">{voltageY} V</div>
+          <div className="text-base font-extrabold text-indigo-300 mt-0.5">{voltageY} V</div>
           <div className="text-[9px] text-slate-500 mt-0.5">Range ±150V</div>
         </div>
 
-        <div className="p-2.5 bg-slate-950 rounded-lg border border-slate-800">
+        <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
           <div className="text-[10px] text-slate-400">RESIDUAL RMSE</div>
           <div
             className={`text-base font-extrabold mt-0.5 ${
@@ -224,12 +224,12 @@ export const PiezoMotorSimulator: React.FC<PiezoMotorSimulatorProps> = ({
               : 'READY TO COMPENSATE'}
           </span>
         </div>
-        <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-800">
+        <div className="w-full bg-[#080d1a] h-2 rounded overflow-hidden border border-[#1b2844]">
           <div
             className={`h-full transition-all duration-300 ${
               isCompleted
                 ? 'bg-emerald-400 shadow-[0_0_10px_#10B981]'
-                : 'bg-gradient-to-r from-blue-500 via-cyan-400 to-amber-400'
+                : 'bg-gradient-to-r from-cyan-500 via-teal-400 to-amber-400'
             }`}
             style={{ width: `${(step / 5) * 100}%` }}
           />
@@ -237,7 +237,7 @@ export const PiezoMotorSimulator: React.FC<PiezoMotorSimulatorProps> = ({
       </div>
 
       {/* Real-time Actuator Event Log Console */}
-      <div className="bg-slate-950 rounded-lg p-2.5 border border-slate-800 font-mono text-[10px] text-slate-400 h-20 overflow-y-auto space-y-1">
+      <div className="bg-[#080d1a] rounded p-2.5 border border-[#1b2844] font-mono text-[10px] text-slate-400 h-20 overflow-y-auto space-y-1">
         {logs.map((log, idx) => (
           <div key={idx} className={idx === 0 ? 'text-cyan-300 font-semibold' : 'opacity-80'}>
             &gt; {log}

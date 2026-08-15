@@ -5,14 +5,11 @@ import {
   PlayCircle,
   Download,
   CheckCircle2,
-  AlertCircle,
   Sparkles,
-  Layers,
   Database,
   Check,
   ShieldCheck,
   FileSpreadsheet,
-  Printer,
   FileCheck,
 } from 'lucide-react';
 import { GlassCard } from '../components/common/GlassCard';
@@ -22,6 +19,7 @@ import { FabInterlockBanner } from '../components/common/FabInterlockBanner';
 import { PiezoMotorSimulator } from '../components/common/PiezoMotorSimulator';
 import { InspectionCertificateModal } from '../components/common/InspectionCertificateModal';
 import { InspectionPanel } from '../components/common/InspectionPanel';
+import { FinalizedRecoveryOutput } from '../components/common/FinalizedRecoveryOutput';
 import { LoadedDataset } from '../DatasetUploader';
 
 interface PredictionPageProps {
@@ -104,13 +102,13 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
   return (
     <div className="space-y-6 text-slate-100 pb-12">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1b2844] pb-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2 text-white">
-            <Cpu className="w-6 h-6 text-cyan-400" />
-            AI Drift Prediction & Dataset Verification
+          <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2 text-white font-heading">
+            <Cpu className="w-5 h-5 text-cyan-400" />
+            AI Drift Prediction &amp; Dataset Verification
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-400 mt-1 font-mono">
             Test and verify prediction accuracy against your full 48-lot semiconductor wafer inspection dataset.
           </p>
         </div>
@@ -120,7 +118,7 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
             type="button"
             onClick={handleRunPredict}
             disabled={isPredicting}
-            className="flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs px-4 py-2 rounded-lg shadow-lg shadow-cyan-500/20 transition-all"
+            className="flex items-center gap-1.5 bg-gradient-to-r from-cyan-500 to-teal-400 hover:from-cyan-400 hover:to-teal-300 text-slate-950 font-bold text-xs px-4 py-2 rounded shadow-[0_0_15px_rgba(0,229,255,0.25)] transition-all font-mono uppercase"
           >
             <PlayCircle className={`w-4 h-4 ${isPredicting ? 'animate-spin' : ''}`} />
             Run Model Prediction
@@ -129,7 +127,7 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
           <button
             type="button"
             onClick={() => setIsCertModalOpen(true)}
-            className="flex items-center gap-1.5 bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/40 text-xs font-mono px-3 py-2 rounded-lg transition-colors font-bold"
+            className="flex items-center gap-1.5 bg-emerald-950/70 hover:bg-emerald-900/60 text-emerald-400 border border-emerald-500/40 text-xs font-mono px-3 py-2 rounded transition-colors font-bold uppercase"
           >
             <FileCheck className="w-3.5 h-3.5" />
             Print QC Certificate
@@ -139,7 +137,7 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
             type="button"
             onClick={handleDownloadReport}
             disabled={!prediction}
-            className="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 text-slate-200 text-xs font-mono px-3 py-2 rounded-lg border border-slate-700 transition-colors"
+            className="flex items-center gap-1.5 bg-[#0e1628] hover:bg-[#152038] disabled:opacity-50 text-slate-200 text-xs font-mono px-3 py-2 rounded border border-[#233554] transition-colors"
           >
             <Download className="w-3.5 h-3.5 text-cyan-400" />
             Export JSON
@@ -158,8 +156,8 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
       />
 
       {/* DATASET SCENARIO & LOT SELECTOR TOOLBAR */}
-      <GlassCard className="p-4 space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-2.5">
+      <GlassCard className="p-4 space-y-3 border-[#1e2d4a]">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1b2844] pb-2.5">
           <div className="flex items-center gap-2 text-xs font-bold text-white font-mono">
             <Database className="w-4 h-4 text-cyan-400" />
             <span>TEST DATASET SELECTOR</span>
@@ -188,13 +186,13 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
               key={sc.key}
               type="button"
               onClick={() => handleSelectLot(sc.key as WaferDatasetLot['scenario'], 6)}
-              className={`p-2.5 rounded-lg border text-left transition-all ${
+              className={`p-2.5 rounded border text-left transition-all ${
                 selectedScenario === sc.key
-                  ? 'bg-blue-600/30 border-cyan-400 text-white shadow-[0_0_12px_rgba(6,182,212,0.25)]'
-                  : 'bg-slate-900/80 border-slate-800 text-slate-400 hover:border-slate-700'
+                  ? 'bg-cyan-950/70 border-cyan-400 text-white shadow-[0_0_12px_rgba(0,229,255,0.2)]'
+                  : 'bg-[#080d1a] border-[#1b2844] text-slate-400 hover:border-slate-700'
               }`}
             >
-              <div className="font-bold text-slate-200">{sc.label}</div>
+              <div className="font-bold text-slate-200 font-heading">{sc.label}</div>
               <div className="text-[10px] text-slate-400 mt-0.5">{sc.desc}</div>
             </button>
           ))}
@@ -222,10 +220,10 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
                   onClick={() => handleSelectLot(selectedScenario, idx)}
                   className={`px-3 py-1.5 rounded text-xs font-mono font-bold transition-all ${
                     isLotActive
-                      ? 'bg-cyan-500 text-slate-950 shadow-[0_0_10px_#06B6D4]'
+                      ? 'bg-cyan-400 text-slate-950 shadow-[0_0_10px_#00e5ff]'
                       : isDriftingLot
-                      ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 hover:bg-amber-500/30'
-                      : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                      ? 'bg-amber-950/70 text-amber-300 border border-amber-500/40 hover:bg-amber-900/60'
+                      : 'bg-[#0e1628] text-slate-300 hover:bg-[#152038] border border-[#1b2844]'
                   }`}
                 >
                   Lot {idx < 10 ? `0${idx}` : idx}
@@ -238,18 +236,18 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
 
       {/* GROUND TRUTH VS AI PREDICTION ACCURACY VERIFICATION CARD */}
       {prediction && (
-        <GlassCard glow glowColor={prediction.isCorrect ? 'emerald' : 'amber'} className="p-4 space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+        <GlassCard glow glowColor={prediction.isCorrect ? 'emerald' : 'amber'} className="p-4 space-y-3 border-[#1e2d4a]">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#1b2844] pb-3">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-emerald-400" />
-              <span className="font-bold text-sm text-white">DATASET GROUND TRUTH ACCURACY CHECK</span>
+              <span className="font-bold text-sm text-white font-heading">DATASET GROUND TRUTH ACCURACY CHECK</span>
             </div>
 
             <div
-              className={`px-3 py-1 rounded-full text-xs font-mono font-bold flex items-center gap-1.5 ${
+              className={`px-3 py-1 rounded text-xs font-mono font-bold flex items-center gap-1.5 ${
                 prediction.isCorrect
-                  ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                  : 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
+                  ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-500/40'
+                  : 'bg-amber-950/80 text-amber-400 border border-amber-500/40'
               }`}
             >
               <Check className="w-3.5 h-3.5" />
@@ -258,7 +256,7 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3 font-mono text-xs">
-            <div className="p-2.5 bg-slate-950 rounded border border-slate-800">
+            <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
               <div className="text-[10px] text-slate-400">TARGET FILEPATH</div>
               <div className="text-slate-200 truncate mt-1 text-[11px]" title={currentLot.filepath}>
                 {currentLot.filepath.split('/').pop()}
@@ -266,7 +264,7 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
               <div className="text-[10px] text-cyan-400 mt-0.5">{currentLot.scenario}</div>
             </div>
 
-            <div className="p-2.5 bg-slate-950 rounded border border-slate-800">
+            <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
               <div className="text-[10px] text-slate-400">GROUND TRUTH LABEL</div>
               <div
                 className={`text-sm font-bold mt-1 ${
@@ -278,7 +276,7 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
               <div className="text-[10px] text-slate-500 mt-0.5">Strength: {currentLot.driftStrength}</div>
             </div>
 
-            <div className="p-2.5 bg-slate-950 rounded border border-slate-800">
+            <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
               <div className="text-[10px] text-slate-400">AI PREDICTED LABEL</div>
               <div
                 className={`text-sm font-bold mt-1 ${
@@ -292,19 +290,19 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
               </div>
             </div>
 
-            <div className="p-2.5 bg-slate-950 rounded border border-slate-800">
+            <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
               <div className="text-[10px] text-slate-400">MODEL CONFIDENCE</div>
-              <div className="text-sm font-bold text-blue-400 mt-1">{prediction.confidence}%</div>
+              <div className="text-sm font-bold text-cyan-400 mt-1">{prediction.confidence}%</div>
               <div className="text-[10px] text-slate-500 mt-0.5">Softmax probability</div>
             </div>
 
-            <div className="p-2.5 bg-slate-950 rounded border border-slate-800">
+            <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
               <div className="text-[10px] text-slate-400">RESIDUAL RMSE</div>
               <div className="text-sm font-bold text-emerald-400 mt-1">{prediction.residualErrorNm} nm</div>
               <div className="text-[10px] text-slate-500 mt-0.5">Sub-nanometer error</div>
             </div>
 
-            <div className="p-2.5 bg-slate-950 rounded border border-slate-800">
+            <div className="p-2.5 bg-[#080d1a] rounded border border-[#1b2844]">
               <div className="text-[10px] text-slate-400">INFERENCE LATENCY</div>
               <div className="text-sm font-bold text-cyan-400 mt-1">{prediction.inferenceTimeMs} ms</div>
               <div className="text-[10px] text-slate-500 mt-0.5">ResNet-Transformer</div>
@@ -315,7 +313,7 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
 
       {/* Progress Bar during prediction */}
       {isPredicting && (
-        <GlassCard className="p-4 space-y-2">
+        <GlassCard className="p-4 space-y-2 border-[#1e2d4a]">
           <div className="flex justify-between text-xs font-mono">
             <span className="text-cyan-400 flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5 animate-spin text-cyan-400" />
@@ -323,9 +321,9 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
             </span>
             <span className="text-white font-bold">{progress}%</span>
           </div>
-          <div className="w-full bg-slate-950 h-2 rounded-full overflow-hidden">
+          <div className="w-full bg-[#080d1a] h-2 rounded overflow-hidden">
             <div
-              className="bg-gradient-to-r from-blue-600 via-cyan-400 to-emerald-400 h-full transition-all duration-150"
+              className="bg-gradient-to-r from-cyan-500 via-teal-400 to-emerald-400 h-full transition-all duration-150"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -333,9 +331,9 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
       )}
 
       {/* MAIN VISUALIZATION DISPLAY */}
-      <GlassCard className="space-y-4 p-0 overflow-hidden">
+      <GlassCard className="space-y-4 p-0 overflow-hidden border-[#1e2d4a]">
         {/* Viewport Toolbar */}
-        <div className="h-12 border-b border-white/10 flex flex-wrap items-center justify-between px-6 bg-[#0F172A]/80">
+        <div className="h-12 border-b border-[#1b2844] flex flex-wrap items-center justify-between px-6 bg-[#080d1a]">
           <div className="flex gap-4 text-xs font-medium">
             <button
               type="button"
@@ -353,7 +351,7 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
               onClick={() => setActiveView('diff-map')}
               className={`pb-3 mt-3 px-2 font-mono ${
                 activeView === 'diff-map'
-                  ? 'text-red-400 border-b-2 border-red-400 font-bold'
+                  ? 'text-rose-400 border-b-2 border-rose-400 font-bold'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -384,7 +382,7 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
               type="button"
               onClick={handleRunPredict}
               disabled={isPredicting}
-              className="px-3.5 py-1 bg-blue-600 hover:bg-blue-500 rounded text-xs font-bold text-white shadow-[0_0_10px_rgba(37,99,235,0.5)] transition-all"
+              className="px-3.5 py-1 bg-cyan-500 hover:bg-cyan-400 rounded text-xs font-bold text-slate-950 font-mono shadow-[0_0_10px_rgba(0,229,255,0.3)] transition-all uppercase"
             >
               RE-EVALUATE
             </button>
@@ -453,9 +451,9 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
               </div>
 
               <div>
-                <span className="text-xs font-mono text-red-400 block mb-1 flex items-center justify-between">
+                <span className="text-xs font-mono text-rose-400 block mb-1 flex items-center justify-between">
                   <span>3. FLAGGED DEFECTS (INSP - REF)</span>
-                  <span className="text-[10px] bg-red-500/20 text-red-300 px-1.5 py-0.5 rounded border border-red-500/30">
+                  <span className="text-[10px] bg-rose-950/70 text-rose-300 px-1.5 py-0.5 rounded border border-rose-500/40">
                     NEW DEFECTS ONLY
                   </span>
                 </span>
@@ -497,50 +495,70 @@ export const PredictionPage: React.FC<PredictionPageProps> = ({ loadedDataset })
         initialRotation={currentLot.driftStrength * 0.15}
       />
 
+      {/* FINALIZED RECOVERED WAFER IMAGE & COMPREHENSIVE RANGE METRICS OUTPUT */}
+      <FinalizedRecoveryOutput
+        lotId={currentLot.id}
+        scenario={currentLot.scenario}
+        lotIndex={currentLot.lotIndex}
+        initialDriftStrength={currentLot.driftStrength}
+        initialDriftXNm={Number((currentLot.driftStrength * 48).toFixed(1))}
+        initialDriftYNm={Number((currentLot.driftStrength * -22).toFixed(1))}
+        directionLabel={
+          currentLot.driftStrength === 0 ? 'STABLE / ALIGNED' :
+          currentLot.scenario === 'scratch_migration' ? 'UP_RIGHT_SHIFT' :
+          currentLot.scenario === 'edge_ring_onset' ? 'PERIMETER_RING' :
+          'CENTER_CLUSTER'
+        }
+        confidencePct={prediction ? prediction.confidence : 99.85}
+        onReSimulate={handleRunPredict}
+        onOpenCertificate={() => setIsCertModalOpen(true)}
+      />
+
       {/* QUICK LINKS & BATCH TEST LINK */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <GlassCard glow glowColor="cyan" className="space-y-2">
-          <div className="font-bold text-xs text-slate-200">Interactive Wafer Viewer</div>
-          <p className="text-[11px] text-slate-400">
+        <GlassCard glow glowColor="cyan" className="space-y-2 border-[#1e2d4a]">
+          <div className="font-bold text-xs text-slate-200 font-heading">Interactive Wafer Viewer</div>
+          <p className="text-[11px] text-slate-400 font-mono">
             Open full interactive before/after split slider, zoom pan, and spatial residual error heatmaps.
           </p>
           <button
             type="button"
             onClick={() => navigate('/visualization')}
-            className="w-full mt-2 text-center bg-blue-600/20 hover:bg-blue-600/30 text-cyan-400 border border-blue-500/30 py-1.5 rounded-lg font-mono text-xs transition-colors"
+            className="w-full mt-2 text-center bg-cyan-950/70 hover:bg-cyan-900/60 text-cyan-300 border border-cyan-500/40 py-1.5 rounded font-mono text-xs transition-colors"
           >
             Launch Slider Viewer →
           </button>
         </GlassCard>
 
-        <GlassCard glow glowColor="emerald" className="space-y-2">
-          <div className="font-bold text-xs text-slate-200">Full Dataset Batch Validation</div>
-          <p className="text-[11px] text-slate-400">
+        <GlassCard glow glowColor="emerald" className="space-y-2 border-[#1e2d4a]">
+          <div className="font-bold text-xs text-slate-200 font-heading">Full Dataset Batch Validation</div>
+          <p className="text-[11px] text-slate-400 font-mono">
             Run automated batch evaluation across all 48 dataset lots to test confusion matrix and precision.
           </p>
           <button
             type="button"
             onClick={() => navigate('/upload')}
-            className="w-full mt-2 text-center bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 py-1.5 rounded-lg font-mono text-xs transition-colors"
+            className="w-full mt-2 text-center bg-emerald-950/70 hover:bg-emerald-900/60 text-emerald-400 border border-emerald-500/40 py-1.5 rounded font-mono text-xs transition-colors"
           >
             Test All 48 Lots →
           </button>
         </GlassCard>
 
-        <GlassCard glow glowColor="amber" className="space-y-2">
-          <div className="font-bold text-xs text-slate-200">Performance Metrics Report</div>
-          <p className="text-[11px] text-slate-400">
+        <GlassCard glow glowColor="amber" className="space-y-2 border-[#1e2d4a]">
+          <div className="font-bold text-xs text-slate-200 font-heading">Performance Metrics Report</div>
+          <p className="text-[11px] text-slate-400 font-mono">
             View model loss curves, precision-recall metrics, and inference latency distribution charts.
           </p>
           <button
             type="button"
             onClick={() => navigate('/performance')}
-            className="w-full mt-2 text-center bg-amber-600/20 hover:bg-amber-600/30 text-amber-400 border border-amber-500/30 py-1.5 rounded-lg font-mono text-xs transition-colors"
+            className="w-full mt-2 text-center bg-amber-950/70 hover:bg-amber-900/60 text-amber-400 border border-amber-500/40 py-1.5 rounded font-mono text-xs transition-colors"
           >
             View Model Metrics →
           </button>
         </GlassCard>
       </div>
+
       {/* PRINTABLE INSPECTION CERTIFICATE MODAL */}
       <InspectionCertificateModal
         isOpen={isCertModalOpen}

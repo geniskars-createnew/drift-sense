@@ -33,7 +33,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 font-sans text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-[#080c14] text-slate-100 flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
       <Navbar />
 
       {isLanding ? (
@@ -46,7 +46,7 @@ function AppContent() {
             collapsed={sidebarCollapsed}
             onToggleCollapse={() => setSidebarCollapsed(!sidebarCollapsed)}
           />
-          <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-slate-950">
+          <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-[#080c14]">
             <div className="max-w-7xl mx-auto">
               {isDashboard && (
                 <div className="mb-6">

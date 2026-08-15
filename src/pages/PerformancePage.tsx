@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { BarChart3, Activity, Zap, Target, ShieldCheck, CheckCircle2, FileCheck, Printer } from 'lucide-react';
+import { BarChart3, Activity, Zap, Target, ShieldCheck, CheckCircle2, FileCheck, Printer, Sparkles } from 'lucide-react';
 import { GlassCard } from '../components/common/GlassCard';
 import { MODEL_METRICS_HISTORY } from '../data/mockData';
 import { ConfusionMatrixHeatmap } from '../components/common/ConfusionMatrixHeatmap';
+import { AccuracySelfTestPanel } from '../components/common/AccuracySelfTestPanel';
 import { InspectionCertificateModal } from '../components/common/InspectionCertificateModal';
 import { WAFER_DATASET } from '../data/waferDataset';
+
 import {
   LineChart,
   Line,
@@ -87,6 +89,9 @@ export const PerformancePage: React.FC = () => {
           <div className="text-[10px] text-emerald-400 mt-0.5">TensorRT C++ Pipeline</div>
         </GlassCard>
       </div>
+
+      {/* AUTOMATED ACCURACY SELF-TEST & 9x9 CONFUSION MATRIX (Live Verification) */}
+      <AccuracySelfTestPanel />
 
       {/* 48-LOT INTERACTIVE CONFUSION MATRIX HEATMAP */}
       <ConfusionMatrixHeatmap />
